@@ -1,0 +1,7 @@
+# For vscode stuff
+*.vscode
+*-vscode
+*log
+
+# lpg-planner executable
+*lpg 

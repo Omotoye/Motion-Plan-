@@ -1,0 +1,18 @@
+
+; Version LPG-td-1.0
+; Seed 15934564
+; Problem cleaning-prob.pddl
+; Time 0.00
+; Search time 0.00
+; Parsing time 0.00
+; Mutex time 0.00
+; MakeSpan 8.00
+
+
+0.0002:   (MOVE-FAST BAR TABLE1) [1.0000]
+1.0004:   (MOVE-FAST TABLE1 TABLE3) [0.5000]
+1.5006:   (CLEAN-BIG-TABLE TABLE3) [4.0000]
+5.5010:   (MOVE-FAST TABLE3 TABLE4) [0.5000]
+6.0012:   (CLEAN-SMALL-TABLE TABLE4) [2.0000]
+
+
