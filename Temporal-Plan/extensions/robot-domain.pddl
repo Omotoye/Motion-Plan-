@@ -2,29 +2,29 @@
 
     (:requirements :typing :fluents :durative-actions :duration-inequalities :negative-preconditions)
     (:types
-        location gripper drink - object
-        table bar - location ; the two locations the waiter robot can be at
-        )
+        table gripper drink bar waiter - object
+        waiter1 waiter2 - waiter 
+    )
 
     (:predicates
-        (at-robby ?location - location) ; where the waiter robot is at
-        (conn ?from ?to - location) ; true, if two locations are connected 
+        (at-robby ?table - table) ; where the waiter robot is at
+        (conn ?from ?to - table) ; true, if two tables are connected 
         (carrying-tray)
         (carrying ?drink - drink)
         (gripper-free)
-        (drink-at ?drink - drink ?location - location)
+        (drink-at ?drink - drink ?table - table)
         (loading-tray)
         (tray-at-bar)
         (drink-order ?table - table ?drink - drink)
         (need-clean ?table - table)
-        (cleaning)
         (table-clean ?table - table)
         (tray-ready)
         (preparing)
+        (waiter-at-bar)
     )
 
     (:functions
-        (conn-length ?from ?to - location)
+        (conn-length ?from ?to - table)
         (on-tray) ; the amount of drinks on a tray 
         (drink-ready) ; the amount of drinks that are ready 
         (speed)
@@ -84,7 +84,7 @@
     )
 
     (:durative-action move
-        :parameters (?from ?to - location)
+        :parameters (?from ?to - table)
         :duration (= ?duration (/ (conn-length ?from ?to) (speed)))
         :condition (and
             (at start (at-robby ?from))
@@ -92,6 +92,23 @@
         )
         :effect (and
             (at start (not (at-robby ?from)))
+            (at end (at-robby ?to))
+            (at end (not (at-robby ?from)))
+        )
+    )
+
+    (:durative-action move-to-bar
+        :parameters (?from - table ?to - bar)
+        :duration (= ?duration (/ (conn-length ?from ?to) (speed)))
+        :condition (and
+            (at start (at-robby ?from))
+            (at start (not (waiter-at-bar)))
+            (over all (conn ?from ?to))
+        )
+        :effect (and
+            (at start (not (at-robby ?from)))
+            (at start (waiter-at-bar))
+            (at end (not (waiter-at-bar)))
             (at end (at-robby ?to))
             (at end (not (at-robby ?from)))
         )

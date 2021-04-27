@@ -1,10 +1,9 @@
 (define (problem problem01)
     (:domain robot-domain)
     (:objects
-        table1 table2 table4 - small
-        table3 - big
+        table1 table2 table3 table4 - table
         bar - bar
-        cold1 cold2 - cold
+        cold1 cold2 - drink 
     )
 
     (:init
@@ -56,10 +55,15 @@
         (= (conn-length table4 table3) 1)
 
         (= (on-tray) 0)
-        (= (drink-ready) 2)
-        (= (cold-prep) 3)
-        (= (warm-prep) 5)
+        (= (drink-ready) 0)
+        (= (prep-time cold1) 3)
+        (= (prep-time cold2) 5)
         (= (speed) 2)
+
+        (= (cleaning-time table1) 2)
+        (= (cleaning-time table2) 2)
+        (= (cleaning-time table3) 4)
+        (= (cleaning-time table4) 2)
     )
 
     (:goal

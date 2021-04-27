@@ -1,10 +1,10 @@
 (define (problem problem03)
     (:domain robot-domain)
     (:objects
-        table1 table2 table4 - small
-        table3 - big
+        table1 table2 table3 table4 - table
         bar - bar
-        warm1 warm2 warm3 warm4 - warm
+        warm1 warm2 warm3 warm4 - drink
+
     )
     (:init
         (at-robby bar)
@@ -29,6 +29,7 @@
         (gripper-free)
 
         (tray-at-bar)
+
 
         (drink-order table1 warm1)
         (drink-order table1 warm2)
@@ -55,10 +56,18 @@
         (= (conn-length table4 table3) 1)
 
         (= (on-tray) 0)
-        (= (drink-ready) 4)
-        (= (cold-prep) 3)
-        (= (warm-prep) 5)
+        (= (drink-ready) 0)
         (= (speed) 2)
+
+        (= (prep-time warm1) 5)
+        (= (prep-time warm2) 5)
+        (= (prep-time warm3) 5)
+        (= (prep-time warm4) 5)
+
+        (= (cleaning-time table1) 2)
+        (= (cleaning-time table2) 2)
+        (= (cleaning-time table3) 4)
+        (= (cleaning-time table4) 2)
     )
 
     (:goal
