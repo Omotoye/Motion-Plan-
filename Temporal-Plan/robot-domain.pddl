@@ -70,7 +70,7 @@
         :parameters (?drink - drink ?bar - bar)
         :precondition (and (at-robby ?bar) (drink-at ?drink ?bar) (gripper-free)
             (> (drink-ready) 0) (loading-tray)
-            (not (carrying ?drink)) (< (on-tray) 3) (tray-at-bar)
+            (not (carrying ?drink)) (< (on-tray) 3) (tray-at-bar) (not (carrying-tray))
         )
         :effect (and (carrying ?drink) (not (drink-at ?drink ?bar)) (increase (on-tray) 1) (decrease (drink-ready) 1) (not (loading-tray))
             (tray-ready) (gripper-free)
